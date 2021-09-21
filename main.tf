@@ -153,8 +153,7 @@ resource "aws_instance" "my-machine" {
       key2 = "t2.medium"            # Instance 2 will have key2 with t2.medium instance type
         }
   instance_type  = each.value
-	key_name       = each.key
-    tags =  {
+  tags =  {
 	   Name  = each.value
 	}
 }
