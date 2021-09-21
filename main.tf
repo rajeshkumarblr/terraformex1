@@ -145,3 +145,16 @@ resource "aws_security_group" "elb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_instance" "my-machine" {
+  ami = "ami-0c55b159cbfafe1f0"
+  for_each  = {                     # for_each iterates over each key and values
+      key1 = "t2.micro"             # Instance 1 will have key1 with t2.micro instance type
+      key2 = "t2.medium"            # Instance 2 will have key2 with t2.medium instance type
+        }
+  instance_type  = each.value
+	key_name       = each.key
+    tags =  {
+	   Name  = each.value
+	}
+}
