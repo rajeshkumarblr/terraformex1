@@ -46,7 +46,7 @@ locals {
 
 resource "aws_instance" "web" {
 
-  for_each = {for server in local.instances: server.instance_name =>  server}
+  for_each = {for server in var.configuration: server.instance_name =>  server}
   
   ami           = each.value.ami
   instance_type = each.value.instance_type
