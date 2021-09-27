@@ -51,7 +51,7 @@ resource "aws_instance" "web" {
   ami           = each.value.ami
   instance_type = each.value.instance_type
   tags = {
-    Name = "${each.value.instance_name}"
+    Name = "${each.value.application_name}"
   }
 }
 
