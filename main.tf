@@ -46,19 +46,10 @@ locals {
 
 resource "aws_instance" "web" {
 
-  for_each = {for server in var.configuration: server.instance_name =>  server}
+  for_each = var.configuration
   
   ami           = each.value.ami
   instance_type = each.value.instance_type
-  #vpc_security_group_ids = each.value.security_groups
-  user_data = <<EOF
-#!/bin/bash
-echo "Changing the hostname to ${each.value.instance_name}"
-hostname ${each.value.instance_name}
-echo "${each.value.instance_name}" > /etc/hostname
-
-EOF
-  #subnet_id = each.value.subnet_id
   tags = {
     Name = "${each.value.instance_name}"
   }
